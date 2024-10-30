@@ -385,5 +385,5 @@ let
   };
 in
 {
-  inherit doomEmacs emacsWithDoom;
+  inherit doomEmacs emacsWithDoom doomProfile;
 }

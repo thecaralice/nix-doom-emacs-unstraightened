@@ -18,7 +18,7 @@ if [[ -z "$profileName" ]]; then
     profileArgs=()
 else
     profileArgs=(
-        --set DOOMPROFILELOADFILE $doomProfile/loader/init.el
+        --set DOOMPROFILELOADFILE "$doomProfile/loader/init.el"
         --set DOOMPROFILE "$profileName"
     )
 fi
@@ -29,19 +29,17 @@ if [[ -n "$binPath" ]]; then
     )
 fi
 
-makeWrapper $emacsWithPackages/bin/emacs $out/bin/doom-emacs \
+makeWrapper "$emacsWithPackages/bin/emacs" "$out/bin/doom-emacs" \
     "${profileArgs[@]}" \
     "${common[@]}" \
-    --set DOOMDIR $doomProfile/doomdir \
     --set-default DOOMLOCALDIR "$doomLocalDir" \
     --add-flags "--init-directory=$doomSource"
-makeWrapper $doomSource/bin/doomscript $out/bin/doomscript \
+makeWrapper "$doomSource/bin/doomscript" "$out/bin/doomscript" \
     "${common[@]}" \
-    --set EMACS $emacsWithPackages/bin/emacs \
+    --set EMACS "$emacsWithPackages/bin/emacs" \
     --set-default DOOMLOCALDIR "$doomLocalDir"
-makeWrapper $doomSource/bin/doom $out/bin/doom \
+makeWrapper "$doomSource/bin/doom" "$out/bin/doom" \
     "${common[@]}" \
-    --set EMACS $emacsWithPackages/bin/emacs \
+    --set EMACS "$emacsWithPackages/bin/emacs" \
     "${profileArgs[@]}" \
-    --set DOOMDIR $doomProfile/doomdir \
     --set-default DOOMLOCALDIR "$doomLocalDir"
